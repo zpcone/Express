@@ -1,0 +1,57 @@
+<%- include nav %>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test1</title>
+	<style>
+		button{
+			height:50px;
+			width:50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="content">
+			<input type="text" class="name" placeholder="昵称" />
+			<input type="text" class="password" placeholder="密码" />
+			<button></button>
+	</div>
+
+</body>
+<script>
+	var username = $(".name").val();
+	var userpassword = $(".password").val();
+	$("button").on("click",function(){
+		$.ajax({
+			url:"/test2",
+			type:"POST",
+			async:true,
+			data:{
+				"name":$(".name").val(),
+				"password":$(".password").val()
+			},
+			dataType:'json',
+			success:function(data){
+				console.log(data.name);
+				if(data.name == 'gg'){
+					console.log('test')
+				}		
+				else{
+					$("button").css({"background-color":"red"})
+				}
+			},
+		  	error:function(xhr,textStatus,err){
+	   			 console.log('错误')
+	   			 console.log(xhr)
+	   			 console.log(err)
+	   			 console.log(textStatus)
+   			 },
+			complete:function(){
+				console.log('结束')
+			}
+		})
+	})
+</script>
+</html>
