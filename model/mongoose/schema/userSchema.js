@@ -11,7 +11,6 @@ var userSchema = new mongoose.Schema({
 	password: {
 		type:String
 	},
-
 	role:{
 		type:Number,
 		default:10
@@ -19,6 +18,9 @@ var userSchema = new mongoose.Schema({
 	image:{
 		type:String,
 		default:"./files/pro-img.png"
+	},
+	email: {
+		type:String
 	},
 	meta: {
 		createAt: {
@@ -31,7 +33,6 @@ var userSchema = new mongoose.Schema({
 		}
 	}
 });
-
 userSchema.pre("save",function(next){
 	var user  = this;
 	if(this.isNew){

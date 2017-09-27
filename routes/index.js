@@ -12,6 +12,7 @@ module.exports =  function(app){
         res.locals.user = req.session.user;
         next();
     });
+
 	app.get("/",function(req,res){
 		res.render("index");
 	});
@@ -24,15 +25,13 @@ module.exports =  function(app){
 		res.render("signup");
 	});
 
-	// app.post("/signin",userController.signin);
-	// app.post("/signin",userController.login);
-
 	app.post("/signup",userController.signup);
 	
 	//头像上传
 	app.get("/upload",function(req,res){
 		res.render("upload");
 	});
+
 	app.post('/signin',userController.login);
 
 	app.post('/upload',function(req,res){
@@ -61,17 +60,12 @@ module.exports =  function(app){
 			console.log('upload success');	
 		});
 	});
+
 	app.get('/logout',function(req,res){
 		req.session.user = null;
 		res.redirect('/');
 	});	
 
-
-	app.post("/randommes",function(req,res){
-		req.session.user.check = req.body;
-		res.send(req.body);
+	app.post("/randommes",userController.send_email);
 		// res.render('idnex');
-	});
-		
-
 }
